@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import TodosItems from './TodosItems';
 
 const Todos = () => {
 
     let todo = ""
 
+    // a state that holds a default empty array
     const [ listTodo, setListTodo ] = useState([])
 
-    
-
+     
+    // a function that replace state with previous state and adds the new "list: todo"
     function addTodo() {
         setListTodo(prev => {
             return [...prev, {list: todo}]
@@ -17,6 +19,7 @@ const Todos = () => {
         document.querySelector("#input").value = "";
     }
 
+
     const removeTodo = (e) => {
         const list = e.target.getAttribute("list")
         setListTodo(listTodo.filter( item => item.list !== list))
@@ -24,7 +27,7 @@ const Todos = () => {
     }
 
    
-
+    // a function with an event that takes whatever i write in the input field and put it into "todo" variable
     function handleChange(e) {
         todo = e.target.value
         console.log(todo)
@@ -33,20 +36,8 @@ const Todos = () => {
         <div>
             <Input placeholder="Write down todo's" id="input" onChange={handleChange} type="text" />
             <Button onClick={addTodo}>Add a todo</Button>
-
-            <Ul>
-                <p style={{textAlign: "start"}}>Todo's to complete</p>
-                <Line></Line>
-                {listTodo.map( (item, index) => {
-                    return (
-                        <ItemWrapper>
-                            <Li key={index}>{item.list}</Li>
-                            <span list={item.list} onClick={removeTodo}>close</span>
-                        </ItemWrapper>
-                    )
-                })}
-                
-            </Ul>
+            <TodosItems listItems={listTodo} removeItems={removeTodo} />
+            
         </div>
     )
 }
@@ -77,41 +68,4 @@ const Button = styled.button`
     margin-left: 10px;
 `;
 
-const Line = styled.div`
-    width: 100%;
-    height: 1px;
-    background: #fff;
-    margin-bottom: 10px;
-`;
 
-const ItemWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    
-    span {
-        font-size: 14px;
-        cursor: pointer;
-        transition: 0.3s ease;
-        :hover {
-            transform: scale(1.1);
-            color: #ececec;
-            transition: 0.3s ease;
-        }
-    }
-`;
-
-const Ul = styled.ul`
-    border: 1px solid #fff;
-    border-radius: 10px;
-    padding: 10px 40px;
-    p {
-        margin: 0;
-    }
-`;
-
-const Li = styled.li`
-    list-style-type: none;
-    text-align: start;
-    font-size: 16px;
-`;
