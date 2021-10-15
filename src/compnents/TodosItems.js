@@ -10,7 +10,6 @@ const TodosItems = ({ listItems, removeItems }) => {
                 {listItems.map( item => {
                     return (
                         <ItemWrapper>
-                            <h6>{item.desc}</h6>
                             <Li key={item.id}>{item.list}</Li>
                             <span  onClick={() => removeItems(item.id)}>close</span>
                         </ItemWrapper>
