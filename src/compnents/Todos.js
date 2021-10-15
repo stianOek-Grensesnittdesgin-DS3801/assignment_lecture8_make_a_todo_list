@@ -3,29 +3,32 @@ import styled from 'styled-components';
 import TodosItems from './TodosItems';
 
 const Todos = () => {
-
+    
     let todo = ""
 
     // a state that holds a default empty array
     const [ listTodo, setListTodo ] = useState([])
+    const [ count, setCount ] = useState(0);
 
      
     // a function that replace state with previous state and adds the new "list: todo"
     function addTodo() {
         setListTodo(prev => {
-            return [...prev, {list: todo}]
+            return [...prev, { id: count, list: todo }]
         })
-        console.log(todo)
+        setCount( prev => {
+            return prev += 1;
+        })
+        console.log(count)
         document.querySelector("#input").value = "";
     }
 
 
-    const removeTodo = (e) => {
-        const list = e.target.getAttribute("list")
-        setListTodo(listTodo.filter( item => item.list !== list))
-      
+    const removeTodo = (id) => {
+        const newList = listTodo.filter( (item) => item.id !== id);
+        setListTodo(newList) 
     }
-
+    
    
     // a function with an event that takes whatever i write in the input field and put it into "todo" variable
     function handleChange(e) {

@@ -7,11 +7,12 @@ const TodosItems = ({ listItems, removeItems }) => {
             <Ul>
                 <p style={{textAlign: "start"}}>Todo's to complete</p>
                 <Line></Line>
-                {listItems.map( (item, index) => {
+                {listItems.map( item => {
                     return (
                         <ItemWrapper>
-                            <Li key={index}>{item.list}</Li>
-                            <span list={item.list} onClick={removeItems}>close</span>
+                            <h6>{item.desc}</h6>
+                            <Li key={item.id}>{item.list}</Li>
+                            <span  onClick={() => removeItems(item.id)}>close</span>
                         </ItemWrapper>
                     )
                 })}
