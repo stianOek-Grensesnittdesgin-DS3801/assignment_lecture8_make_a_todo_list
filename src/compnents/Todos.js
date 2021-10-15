@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import TodosItems from './TodosItems';
 
 const Todos = () => {
-    
+
     let todo = ""
 
     // a state that holds a default empty array
@@ -23,7 +23,7 @@ const Todos = () => {
         document.querySelector("#input").value = "";
     }
 
-
+    // remove items by checking wheater or not the component re-renders to display only the remaining items
     const removeTodo = (id) => {
         const newList = listTodo.filter( (item) => item.id !== id);
         setListTodo(newList) 
