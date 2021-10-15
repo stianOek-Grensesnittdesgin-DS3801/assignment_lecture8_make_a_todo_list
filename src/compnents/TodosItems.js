@@ -10,6 +10,7 @@ const TodosItems = ({ listItems, removeItems }) => {
                 {listItems.map( item => {
                     return (
                         <ItemWrapper>
+                            <p>{item.id}</p>
                             <Li key={item.id}>{item.list}</Li>
                             <span  onClick={() => removeItems(item.id)}>close</span>
                         </ItemWrapper>
@@ -25,18 +26,37 @@ export default TodosItems
 
 const Line = styled.div`
     width: 100%;
-    height: 1px;
-    background: #fff;
+    height: 2px;
+    background: #4B7554;
     margin-bottom: 10px;
+    margin-top: 10px;
 `;
 
 const ItemWrapper = styled.div`
+    position: relative;
+    margin-top: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+    border: 1px solid #fff;
+    padding: 40px 60px;
+    border-radius: 10px;
+    background-color: #fff;
+    color: #282c34;
+    p {
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        border: 1px solid #fff;
+        width: 40px;
+        height: 40px;
+        font-size: 25px;
+        border-radius: 50%;
+        background-color: #4B7554;
+        color: #fff;
+    }
     span {
-        font-size: 14px;
+        font-size: 20px;
         cursor: pointer;
         transition: 0.3s ease;
         :hover {
@@ -48,7 +68,6 @@ const ItemWrapper = styled.div`
 `;
 
 const Ul = styled.ul`
-    border: 1px solid #fff;
     border-radius: 10px;
     padding: 10px 40px;
     p {
@@ -59,5 +78,6 @@ const Ul = styled.ul`
 const Li = styled.li`
     list-style-type: none;
     text-align: start;
-    font-size: 16px;
+    font-size: 20px;
+   
 `;

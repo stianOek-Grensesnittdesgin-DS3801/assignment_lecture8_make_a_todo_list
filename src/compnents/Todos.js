@@ -10,14 +10,14 @@ const Todos = () => {
     const [ listTodo, setListTodo ] = useState([])
     const [ count, setCount ] = useState(0);
 
-     
+    
     // a function that replace state with previous state and adds the new "list: todo"
     function addTodo() {
         setListTodo(prev => {
             return [...prev, { id: count, list: todo }]
         })
         setCount( prev => {
-            return prev += 1;
+            return prev + 1;
         })
         console.log(count)
         document.querySelector("#input").value = "";
@@ -35,12 +35,20 @@ const Todos = () => {
         todo = e.target.value
         console.log(todo)
     }
+
+    let input = document.getElementById("input");
+    input.addEventListener("keydown", function(e) {
+        if(e.keyCode === 13) {
+            e.preventDefault()
+        }
+    })
+
+    
     return (
-        <div>
-            <Input placeholder="Write down todo's" id="input" onChange={handleChange} type="text" />
+        <div style={{width: "100%"}}>
+            <Input placeholder="Write down todo's to complete" id="input" onChange={handleChange} type="text" />
             <Button onClick={addTodo}>Add a todo</Button>
-            <TodosItems listItems={listTodo} removeItems={removeTodo} />
-            
+            <TodosItems count={count} listItems={listTodo} removeItems={removeTodo} />
         </div>
     )
 }
